@@ -1,0 +1,65 @@
+import os
+import time
+import requests
+
+def download_osm_trackpoints(base_url, max_pages=100, output_dir='osm_data1', delay=1):
+    os.makedirs(output_dir, exist_ok=True)
+    
+    page = 1
+    while page <= max_pages:
+        # Формирование имя файла и проверяем его существование
+        filename = os.path.join(output_dir, f"trackpoints_page_{page}.xml")
+        
+        if os.path.exists(filename):
+            print(f"Файл {filename} уже существует, пропускаем страницу {page}")
+            page += 1
+            continue
+            
+        # Формирование URL с текущим номером страницы
+        url = f"{base_url}{page}"
+        print(f"Загружаем страницу {page}...")
+        
+        try:
+            # Отправка GET-запроса
+            response = requests.get(url, stream=True)
+            response.raise_for_status()  # Проверяем на ошибки
+            
+            # Проверка, есть ли данные (не пустой ли ответ)
+            if response.content:
+                # Сохранение данных в файл
+                with open(filename, 'wb') as f:
+                    f.write(response.content)
+                print(f"Данные сохранены в {filename}")
+                
+                # Увеличение номера страницы для следующего запроса
+                page += 1
+                
+                # Добавление задержки между запросами
+                if delay > 0 and page <= max_pages:
+                    print(f"Ожидаем {delay} секунд перед следующим запросом...")
+                    time.sleep(delay)
+            else:
+                print("Получен пустой ответ. Завершение.")
+                break
+                
+        except requests.exceptions.RequestException as e:
+            print(f"Ошибка при загрузке страницы {page}: {e}")
+            break
+
+if __name__ == "__main__":
+    # Базовый URL без номера страницы
+    base_url = "https://api.openstreetmap.org/api/0.6/trackpoints?bbox=38.95887,45.00807,39.02845,45.05076&page="
+    
+    # Параметры загрузки
+    download_params = {
+        'max_pages': 100,      # Максимальное количество страниц
+        'output_dir': 'osm_data',  # Папка для сохранения
+        'delay': 1            # Задержка между запросами (1 секунда)
+    }
+    
+    download_osm_trackpoints(base_url, **download_params)
+
+
+
+
+
