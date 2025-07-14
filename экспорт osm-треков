@@ -7,7 +7,7 @@ def download_osm_trackpoints(base_url, max_pages=100, output_dir='osm_data1', de
     
     page = 1
     while page <= max_pages:
-        # Формирование имя файла и проверяем его существование
+        # Формирование имя файла и проверка его на существование
         filename = os.path.join(output_dir, f"trackpoints_page_{page}.xml")
         
         if os.path.exists(filename):
