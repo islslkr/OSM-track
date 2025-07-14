@@ -20,7 +20,7 @@ OSM Trackpoints Downloader
 2. Установите необходимые зависимости:
   
 
-       """pip install requests
+       pip install requests
    
 #Использование
 
@@ -33,7 +33,7 @@ OSM Trackpoints Downloader
 
 3. Запустите скрипт:
   
-       """python экспорт_osm_треков.py
+       python экспорт_osm_треков.py
    
 #Важные замечания
 
@@ -57,4 +57,3 @@ OSM Trackpoints Downloader
 
 Этот проект распространяется под лицензией MIT. Использование данных OpenStreetMap регулируется лицензией ODbL.
 
-    """
