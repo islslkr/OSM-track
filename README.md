@@ -2,7 +2,6 @@
 
 
 
-    """
 OSM Trackpoints Downloader
 
 Этот скрипт предназначен для загрузки трекпоинтов (точек треков) из OpenStreetMap API с проверкой существующих файлов и задержкой.
@@ -20,7 +19,8 @@ OSM Trackpoints Downloader
 1. Убедитесь, что у вас установлен Python 3.x
 2. Установите необходимые зависимости:
   
-   pip install requests
+
+       """pip install requests
    
 #Использование
 
@@ -33,7 +33,7 @@ OSM Trackpoints Downloader
 
 3. Запустите скрипт:
   
-   python экспорт_osm_треков.py
+       """python экспорт_osm_треков.py
    
 #Важные замечания
 
